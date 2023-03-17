@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2023 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,10 +56,11 @@ describe("Serverless workflow editor - functions tests", () => {
     await textEditor.typeText(Key.ENTER);
 
     // check content assist contains functions from specs directory
+    await textEditor.typeText("s");
     const contentAssist = await textEditor.toggleContentAssist(true);
     const items = await contentAssist?.getItems();
     const functionNames = await Promise.all(items?.map(async (i) => await i.getLabel()) ?? []);
-    expect(functionNames).to.contain.members([
+    expect(functionNames).to.have.all.members([
       "specs»asyncapi.json#publishJsonOperation",
       "specs»asyncapi.json#subscribeJsonOperation",
       "specs»asyncapi.yaml#publishYamlOperation",
@@ -70,8 +71,6 @@ describe("Serverless workflow editor - functions tests", () => {
       "specs»openapi.yaml#testPutYamlFunc",
     ]);
 
-    await textEditor.toggleContentAssist(false);
-
     // add function from asyncapi yaml specification
     await selectFromContentAssist(textEditor, "specs»asyncapi.yaml#publishYamlOperation");
 
@@ -79,7 +78,26 @@ describe("Serverless workflow editor - functions tests", () => {
     await textEditor.typeText("," + Key.ENTER);
 
     // add function from openapi json specification
+    await textEditor.typeText("s");
     await selectFromContentAssist(textEditor, "specs»openapi.json#testPutJsonFunc");
+
+    await textEditor.moveCursor(23, 6);
+    await textEditor.typeText("," + Key.ENTER);
+
+    // check content assist contains functions from routes directory
+    await textEditor.typeText("r");
+    const contentAssistRoutes = await textEditor.toggleContentAssist(true);
+    const routeItems = await contentAssistRoutes?.getItems();
+    const routeNames = await Promise.all(routeItems?.map(async (i) => await i.getLabel()) ?? []);
+    expect(routeNames).to.have.all.members([
+      "routes»camel.json#camel:direct:fromJson",
+      "routes»camel.json#camel:direct:routeJson",
+      "routes»camel.yaml#camel:direct:fromYaml",
+      "routes»camel.yaml#camel:direct:routeYaml",
+    ]);
+
+    // add function from routes json specification
+    await selectFromContentAssist(textEditor, "routes»camel.json#camel:direct:routeJson");
 
     // check the final editor content is the same as expected result
     const editorContent = await textEditor.getText();
@@ -98,6 +116,7 @@ describe("Serverless workflow editor - functions tests", () => {
     await textEditor.typeText(" ");
 
     // check content assist contains functions from specs directory
+    await textEditor.typeText("s");
     const contentAssist = await textEditor.toggleContentAssist(true);
     const items = await contentAssist?.getItems();
     const functionNames = await Promise.all(items?.map(async (i) => await i.getLabel()) ?? []);
@@ -119,7 +138,26 @@ describe("Serverless workflow editor - functions tests", () => {
     await textEditor.typeText(Key.ENTER + Key.BACK_SPACE + "- ");
 
     // add function from openapi yaml specification
+    await textEditor.typeText("s");
     await selectFromContentAssist(textEditor, "specs»openapi.yaml#testGetYamlFunc");
+
+    await textEditor.moveCursor(15, 15);
+    await textEditor.typeText(Key.ENTER + Key.BACK_SPACE + "- ");
+
+    // add function from openapi yaml specification
+    await textEditor.typeText("r");
+    const contentAssistRoutes = await textEditor.toggleContentAssist(true);
+    const routeItems = await contentAssistRoutes?.getItems();
+    const routeNames = await Promise.all(routeItems?.map(async (i) => await i.getLabel()) ?? []);
+    expect(routeNames).to.have.all.members([
+      "routes»camel.json#camel:direct:fromJson",
+      "routes»camel.json#camel:direct:routeJson",
+      "routes»camel.yaml#camel:direct:fromYaml",
+      "routes»camel.yaml#camel:direct:routeYaml",
+    ]);
+
+    // add function from routes yaml specification
+    await selectFromContentAssist(textEditor, "routes»camel.yaml#camel:direct:fromYaml");
 
     // check the final editor content is the same as expected result
     const editorContent = await textEditor.getText();

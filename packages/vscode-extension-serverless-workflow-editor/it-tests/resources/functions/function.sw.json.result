@@ -20,6 +20,11 @@
       "name": "testPutJsonFunc",
       "operation": "specs/openapi.json#testPutJsonFunc",
       "type": "rest"
+    },
+    {
+      "name": "camel:direct:routeJson",
+      "operation": "routes/camel.json#camel:direct:routeJson",
+      "type": "custom"
     }
   ]
 }

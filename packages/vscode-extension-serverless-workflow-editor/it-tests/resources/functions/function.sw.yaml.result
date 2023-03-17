@@ -13,3 +13,6 @@ functions:
   - name: 'testGetYamlFunc'
     operation: 'specs/openapi.yaml#testGetYamlFunc'
     type: rest
+  - name: 'camel:direct:fromYaml'
+    operation: 'routes/camel.yaml#camel:direct:fromYaml'
+    type: custom
