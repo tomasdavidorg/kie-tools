@@ -52,7 +52,7 @@ describe("Serverless workflow editor - functions tests", () => {
     const swfTextEditor = new SwfTextEditorTestHelper(editorWebviews[0]);
     const textEditor = await swfTextEditor.getSwfTextEditor();
 
-    await textEditor.moveCursor(11, 17);
+    await textEditor.moveCursor(13, 17);
     await textEditor.typeText(Key.ENTER);
 
     // check content assist contains functions from specs directory
@@ -75,7 +75,7 @@ describe("Serverless workflow editor - functions tests", () => {
     // add function from asyncapi yaml specification
     await selectFromContentAssist(textEditor, "specs»asyncapi.yaml#publishYamlOperation");
 
-    await textEditor.moveCursor(16, 6);
+    await textEditor.moveCursor(18, 6);
     await textEditor.typeText("," + Key.ENTER);
 
     // add function from openapi json specification
