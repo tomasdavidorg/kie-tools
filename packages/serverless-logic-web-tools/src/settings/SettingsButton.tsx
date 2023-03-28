@@ -27,6 +27,7 @@ export function SettingsButton() {
       onClick={() => settingsDispatch.open()}
       aria-label="Settings"
       className={"kie-tools--masthead-hoverable-dark"}
+      ouiaId={"settings-button"}
     >
       <CogIcon />
     </Button>
