@@ -204,9 +204,13 @@ export default class VSCodeTestHelper {
    * Closes all notifications that can be found using {@see Workbench}.
    */
   public closeAllNotifications = async (): Promise<void> => {
-    const activeNotifications = await this.workbench.getNotifications();
-    for (const notification of activeNotifications) {
-      await notification.dismiss();
+    try {
+      const activeNotifications = await this.workbench.getNotifications();
+      for (const notification of activeNotifications) {
+        await notification.dismiss();
+      }
+    } catch (e) {
+      console.log("There is an exception during closeAllNotifications:" + e);
     }
   };
 
