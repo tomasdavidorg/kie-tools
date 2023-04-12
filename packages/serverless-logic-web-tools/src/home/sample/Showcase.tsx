@@ -119,6 +119,7 @@ export function Showcase() {
         <DropdownItem
           key={`category-filter-${category}`}
           onClick={() => onSearch({ searchValue: searchFilter, category })}
+          ouiaId={`${category}-dropdownItem`}
         >
           {LABEL_MAP[category]}
         </DropdownItem>
@@ -149,6 +150,7 @@ export function Showcase() {
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
+                data-ouia-component-id="seach-samples-input"
               />
             </FlexItem>
             <FlexItem>
@@ -165,12 +167,13 @@ export function Showcase() {
                   </DropdownToggle>
                 }
                 isOpen={isCategoryFilterDropdownOpen}
+                ouiaId={"categories-dropdown"}
               />
             </FlexItem>
             <FlexItem>
               {filterResultMessage && (
                 <TextContent>
-                  <Text>{filterResultMessage}</Text>
+                  <Text ouiaId={"filter-message"}>{filterResultMessage}</Text>
                 </TextContent>
               )}
             </FlexItem>
