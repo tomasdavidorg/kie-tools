@@ -18,7 +18,6 @@ describe("Serverless Logic Web Tools - Create and edit test", () => {
     cy.visit("/");
   });
 
-  // test
   it("should check all new buttons are present", () => {
     cy.ouia({ ouiaId: "Workflow-card" }).find("button").should("have.length", 2);
     cy.ouia({ ouiaId: "new-sw.json-button" }).should("have.text", "JSON");
