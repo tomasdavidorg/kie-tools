@@ -1189,8 +1189,8 @@ importers:
         specifier: ^2.7.4
         version: 2.7.4
       "@types/selenium-webdriver":
-        specifier: ^4.1.12
-        version: 4.1.12
+        specifier: ^4.1.15
+        version: 4.1.15
       chai:
         specifier: ^4.3.4
         version: 4.3.4
@@ -1348,8 +1348,8 @@ importers:
         specifier: ^4.2.17
         version: 4.2.18
       "@types/selenium-webdriver":
-        specifier: ^4.1.12
-        version: 4.1.12
+        specifier: ^4.1.15
+        version: 4.1.15
       chai:
         specifier: ^4.3.4
         version: 4.3.4
@@ -7561,8 +7561,8 @@ importers:
         specifier: ^8.2.2
         version: 8.2.2
       "@types/selenium-webdriver":
-        specifier: ^4.1.12
-        version: 4.1.12
+        specifier: ^4.1.15
+        version: 4.1.15
       "@types/vscode":
         specifier: ^1.66.0
         version: 1.66.0
@@ -8518,8 +8518,8 @@ importers:
         specifier: ^18.13.0
         version: 18.13.0
       "@types/selenium-webdriver":
-        specifier: ^4.1.12
-        version: 4.1.12
+        specifier: ^4.1.15
+        version: 4.1.15
       mocha:
         specifier: ^9.2.0
         version: 9.2.0
@@ -8606,8 +8606,8 @@ importers:
         specifier: ^17.0.6
         version: 17.0.21
       "@types/selenium-webdriver":
-        specifier: ^4.1.12
-        version: 4.1.12
+        specifier: ^4.1.15
+        version: 4.1.15
       "@types/vscode":
         specifier: ^1.66.0
         version: 1.66.0
@@ -9359,8 +9359,8 @@ importers:
         specifier: ^8.2.2
         version: 8.2.2
       "@types/selenium-webdriver":
-        specifier: ^4.1.12
-        version: 4.1.12
+        specifier: ^4.1.15
+        version: 4.1.15
       "@types/vscode":
         specifier: ^1.66.0
         version: 1.66.0
@@ -17026,9 +17026,9 @@ packages:
     resolution:
       { integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA== }
 
-  /@types/selenium-webdriver@4.1.12:
+  /@types/selenium-webdriver@4.1.15:
     resolution:
-      { integrity: sha512-3DxuYHEbzIyUtuICRtxXtJomdOOkBeCbkXAlAPm/h8ArIn/ArWNnVSC6tIj/ECZ/sdxBoI0F/wuwcpxBew3hGw== }
+      { integrity: sha512-oQ15G3q3EZ0dS049SB/5zx2tQkIS2kmDQWC/TSfAHJYKvXLZoUiLaPXnfSwbLP8Q5lcJeu5oYjKVSEV0t3H6Bg== }
     dependencies:
       "@types/ws": 8.5.4
     dev: true
@@ -34214,7 +34214,7 @@ packages:
       mocha: ">=5.2.0"
       typescript: ">=4.6.2"
     dependencies:
-      "@types/selenium-webdriver": 4.1.12
+      "@types/selenium-webdriver": 4.1.15
       "@vscode/vsce": 2.19.0
       commander: 11.0.0
       compare-versions: 5.0.1
