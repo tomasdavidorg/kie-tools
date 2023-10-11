@@ -3,7 +3,7 @@
   "version": "1.0",
   "specVersion": "0.8",
   "name": "Chrome Extension Sample JSON",
-  "description": "This JSON sample is created for testing purposes.",
+  "description": "This JSON sample is created for testing purposes. aaa",
   "start": "StartState",
   "functions": [
     {
