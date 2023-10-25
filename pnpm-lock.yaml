@@ -7035,6 +7035,9 @@ importers:
       cypress-log-to-output:
         specifier: ^1.1.2
         version: 1.1.2
+      cypress-real-events:
+        specifier: ^1.10.3
+        version: 1.10.3(cypress@13.2.0)
       html-replace-webpack-plugin:
         specifier: ^2.6.0
         version: 2.6.0
@@ -27047,6 +27050,15 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: true
+
+  /cypress-real-events@1.10.3(cypress@13.2.0):
+    resolution:
+      { integrity: sha512-YN3fn+CJIAM638sE6uMvv2/n3PsWowdd0rOiN6ZoyezNAMyENfuQHvccLKZpN+apGfQZYetCml6QXLYgDid2fg== }
+    peerDependencies:
+      cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x
+    dependencies:
+      cypress: 13.2.0
     dev: true
 
   /cypress@13.2.0:
