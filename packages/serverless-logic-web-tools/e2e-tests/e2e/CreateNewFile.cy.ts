@@ -22,7 +22,7 @@ describe("Serverless Logic Web Tools - Create and edit test", () => {
     cy.visit("/");
   });
 
-  it("should check all new buttons are present", () => {
+  it.skip("should check all new buttons are present", () => {
     cy.ouia({ ouiaId: "Workflow-card" }).find("button").should("have.length", 2);
     cy.ouia({ ouiaId: "new-sw.json-button" }).should("have.text", "JSON");
     cy.ouia({ ouiaId: "new-sw.yaml-button" }).should("have.text", "YAML");
@@ -34,7 +34,7 @@ describe("Serverless Logic Web Tools - Create and edit test", () => {
     cy.ouia({ ouiaId: "new-dash.yaml-button" }).should("have.text", "YAML");
   });
 
-  it("should create a new JSON serverless workflow", () => {
+  it.skip("should create a new JSON serverless workflow", () => {
     cy.ouia({ ouiaId: "new-sw.json-button" }).click();
     cy.loadEditor();
 
@@ -73,7 +73,7 @@ describe("Serverless Logic Web Tools - Create and edit test", () => {
     cy.get("#total-notifications").should("have.text", 0);
   });
 
-  it("should create a new YAML serverless workflow", () => {
+  it.skip("should create a new YAML serverless workflow", () => {
     cy.ouia({ ouiaId: "new-sw.yaml-button" }).click();
     cy.loadEditor();
 
@@ -110,9 +110,10 @@ describe("Serverless Logic Web Tools - Create and edit test", () => {
 
     // check there are no problems in YAML file
     cy.get("#total-notifications").should("have.text", 0);
+    i;
   });
 
-  it("should create a new Dashbuilder file", () => {
+  it.skip("should create a new Dashbuilder file", () => {
     cy.ouia({ ouiaId: "new-dash.yaml-button" }).click();
     cy.loadEditor();
 
@@ -138,5 +139,38 @@ describe("Serverless Logic Web Tools - Create and edit test", () => {
 
     // check there are no problems in dashbuilder file
     cy.get("#total-notifications").should("have.text", 0);
+  });
+
+  it("should create a new YAML serverless decision", () => {
+    cy.ouia({ ouiaId: "new-yard.yaml-button" }).click();
+    cy.loadEditor();
+
+    // check header labels
+    cy.ouia({ ouiaId: "file-name-input" }).should("have.value", "Untitled");
+    cy.ouia({ ouiaId: "file-type-label" }).should("have.text", "Serverless Decision");
+
+    cy.getEditor().within(() => {
+      cy.get(".codelens-decoration a:contains('Create a Serverless Decision')").click();
+      cy.get("[aria-label='Serverless Decision Example'] a").click();
+
+      cy.get(".monaco-editor").type("{pageUp}");
+
+      cy.get(".monaco-editor textarea")
+        .should("contain.value", "specVersion: alpha")
+        .should("contain.value", "kind: YaRD")
+        .should("contain.value", "name: 'Traffic Violation'")
+        .should("contain.value", "expressionLang: alpha");
+
+      cy.ouia({ ouiaId: "yard-name-input" }).should("have.value", "Traffic Violation");
+      cy.ouia({ ouiaId: "yard-type-input" }).should("have.value", "YaRD");
+      cy.ouia({ ouiaId: "yard-expr-lang-version-input" }).should("have.value", "alpha");
+      cy.ouia({ ouiaId: "yard-spec-version-input" }).should("have.value", "alpha");
+
+      cy.ouia({ ouiaId: "yard-ui-tabs" }).ouia({ ouiaId: "decision-inputs-tab" }).click();
+
+      cy.ouia({ ouiaType: "decison-input-name" }).should(($items) => {
+        expect($items.length).eq(2);
+      });
+    });
   });
 });

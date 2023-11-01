@@ -258,7 +258,13 @@ export const YardUIEditor = ({ yardData, isReadOnly }: Props) => {
 
   return (
     <div className={"yard-ui-editor"}>
-      <Tabs activeKey={activeTabIndex} aria-label="yard menu tabs" isBox={false} onSelect={handleTabClick}>
+      <Tabs
+        activeKey={activeTabIndex}
+        aria-label="yard menu tabs"
+        isBox={false}
+        onSelect={handleTabClick}
+        ouiaId={"yard-ui-tabs"}
+      >
         <Tab eventKey={0} title={<TabTitleText>{i18n.generalTab.tabTitle}</TabTitleText>}>
           <div className={"general-body"}>
             <Title headingLevel="h6" size={TitleSizes.md}>
@@ -268,6 +274,7 @@ export const YardUIEditor = ({ yardData, isReadOnly }: Props) => {
               id={"name-text-input"}
               isReadOnly={isReadOnly}
               value={yardData?.name ? yardData.name : ""}
+              ouiaId={"yard-name-input"}
             ></TextInput>
             <div className={"separator"}></div>
             <Title headingLevel="h6" size={TitleSizes.md}>
@@ -277,6 +284,7 @@ export const YardUIEditor = ({ yardData, isReadOnly }: Props) => {
               id={"kind-text-input"}
               isReadOnly={isReadOnly}
               value={yardData?.kind ? yardData.kind : ""}
+              ouiaId={"yard-type-input"}
             ></TextInput>
             <div className={"separator"}></div>
             <Title headingLevel="h6" size={TitleSizes.md}>
@@ -286,6 +294,7 @@ export const YardUIEditor = ({ yardData, isReadOnly }: Props) => {
               id={"expression-lang-text-input"}
               isReadOnly={isReadOnly}
               value={yardData?.expressionLang ? yardData.expressionLang : ""}
+              ouiaId={"yard-expr-lang-version-input"}
             ></TextInput>
             <div className={"separator"}></div>
             <Title headingLevel="h6" size={TitleSizes.md}>
@@ -295,10 +304,15 @@ export const YardUIEditor = ({ yardData, isReadOnly }: Props) => {
               id={"specVersion-text-input"}
               isReadOnly={isReadOnly}
               value={yardData?.specVersion ? yardData.specVersion : ""}
+              ouiaId={"yard-spec-version-input"}
             ></TextInput>
           </div>
         </Tab>
-        <Tab eventKey={1} title={<TabTitleText>{i18n.decisionInputsTab.tabTitle}</TabTitleText>}>
+        <Tab
+          eventKey={1}
+          title={<TabTitleText>{i18n.decisionInputsTab.tabTitle}</TabTitleText>}
+          ouiaId={"decision-inputs-tab"}
+        >
           <div className={"decision-input-body"}>
             {yardData?.inputs && yardData?.inputs.length > 0 ? (
               yardData.inputs.map((input, index) => {
@@ -311,6 +325,7 @@ export const YardUIEditor = ({ yardData, isReadOnly }: Props) => {
                       id={"expression-lang-text-input"}
                       isReadOnly={isReadOnly}
                       value={input?.name ? input.name : ""}
+                      data-ouia-component-type="decison-input-name"
                     ></TextInput>
                     <div className={"separator"}></div>
                     <Title headingLevel="h6" size={TitleSizes.md}>
@@ -320,6 +335,7 @@ export const YardUIEditor = ({ yardData, isReadOnly }: Props) => {
                       id={"expression-lang-text-input"}
                       isReadOnly={isReadOnly}
                       value={input?.type ? input.type : ""}
+                      data-ouia-component-type="decison-input-type"
                     ></TextInput>
                     <Divider />
                   </div>
