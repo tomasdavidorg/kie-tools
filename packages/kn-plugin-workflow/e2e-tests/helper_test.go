@@ -73,6 +73,9 @@ func ExecuteKnWorkflowQuarkusWithCmd(cmd *exec.Cmd, args ...string) (string, err
 // It returns the combined standard output as a string and an error if the command fails.
 // It also prints out the standard output to the console if 'e2e_tests.testPrintCmdOutput' is set to 'true'.
 func executeCommandWithOutput(cmd *exec.Cmd, args ...string) (string, error) {
+	fmt.Println("###############")
+	fmt.Println(append([]string{cmd.Path}, args...))
+	fmt.Println("###############")
 	cmd.Args = append([]string{cmd.Path}, args...)
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
