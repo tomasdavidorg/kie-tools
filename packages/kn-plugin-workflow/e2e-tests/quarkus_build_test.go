@@ -98,7 +98,7 @@ func transformQuarkusBuildCmdCfgToArgs(cfg quarkus.BuildCmdConfig) []string {
 func TestQuarkusBuildCommand(t *testing.T) {
 	for testIndex, test := range cfgTestInputQuarkusBuild_Success {
 		t.Run(fmt.Sprintf("Test build project success index: %d", testIndex), func(t *testing.T) {
-			defer CleanUpAndChdirTemp(t)
+			//defer CleanUpAndChdirTemp(t)
 			RunQuarkusBuildTest(t, cfgTestInputPrepareQuarkusCreateBuild, test, true)
 		})
 	}
