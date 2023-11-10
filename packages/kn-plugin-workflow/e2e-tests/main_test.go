@@ -58,7 +58,7 @@ func TestMain(m *testing.M) {
 	exitCode := m.Run()
 
 	// Cleanup after tests
-	cleanUpTemp(workingPath, tempDirName)
+	//cleanUpTemp(workingPath, tempDirName)
 
 	os.Exit(exitCode)
 }
