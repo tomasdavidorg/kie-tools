@@ -46,6 +46,7 @@ beforeEach(async () => {
 });
 
 test(TEST_NAME, async () => {
+  // just comment
   const gitHubListPage: GitHubListPage = await tools.openPage(
     GitHubListPage,
     "https://github.com/kiegroup/kie-tools/tree/main/packages/chrome-extension-serverless-workflow-editor/e2e-tests/samples"
