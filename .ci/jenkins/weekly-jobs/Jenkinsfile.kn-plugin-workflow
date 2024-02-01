@@ -89,7 +89,9 @@ pipeline {
         stage("Setup go.mod") {
             steps {
                 dir("packages/kn-plugin-workflow") {
-                    sh "go get github.com/kiegroup/kogito-serverless-operator/workflowproj@v1.44.1"
+                    sh """#!/bin/bash -el
+                    go get github.com/kiegroup/kogito-serverless-operator/workflowproj@v1.44.1rod
+                    """.trim()
                 }
             }
         }
