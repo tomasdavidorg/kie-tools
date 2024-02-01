@@ -35,8 +35,6 @@ pipeline {
         string(description: 'Kogito Version', name: 'KOGITO_VERSION', defaultValue: '1.44.1.Final')
         string(description: 'Dev Mode Image Version', name: 'DEV_MODE_IMAGE_VERSION', defaultValue: '1.44')
 
-        string(description: 'Dev Mode Image', name: 'DEV_MODE_IMAGE', defaultValue: "quay.io/kiegroup/kogito-swf-devmode:${DEV_MODE_IMAGE_VERSION}")
-
     }
 
     environment {
@@ -45,7 +43,7 @@ pipeline {
         KIE_TOOLS_BUILD__runEndToEndTests = 'false'
         KIE_TOOLS_BUILD__buildContainerImages = 'true'
         KN_PLUGIN_WORKFLOW__kogitoVersion = "${KOGITO_VERSION}"
-        KN_PLUGIN_WORKFLOW__devModeImage = "${DEV_MODE_IMAGE}"
+        KN_PLUGIN_WORKFLOW__devModeImage = "quay.io/kiegroup/kogito-swf-devmode:${DEV_MODE_IMAGE_VERSION}"
 
         PNPM_FILTER_STRING = '-F @kie-tools/kn-plugin-workflow...'
     }
