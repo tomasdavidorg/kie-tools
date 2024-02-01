@@ -34,6 +34,7 @@ pipeline {
 
         string(description: 'Kogito Version', name: 'KOGITO_VERSION', defaultValue: '1.44.1.Final')
         string(description: 'Dev Mode Image Version', name: 'DEV_MODE_IMAGE_VERSION', defaultValue: '1.44')
+        string(description: 'Kogito Serverless Operator Version', name: 'KOGITO_SERVERLESS_OPERATOR_VERSION', defaultValue: 'v1.44.1')
 
     }
 
@@ -81,6 +82,14 @@ pipeline {
                         "${params.BASE_REF}",
                         "${pipelineVars.kieToolsBotGithubCredentialsId}"
                     )
+                }
+            }
+        }
+
+        stage("Setup go.mod") {
+            steps {
+                dir("packages/kn-plugin-workflow") {
+                    sh "go get github.com/kiegroup/kogito-serverless-operator/workflowproj@v1.44.1"
                 }
             }
         }
