@@ -91,6 +91,7 @@ pipeline {
                 dir("packages/kn-plugin-workflow") {
                     sh """#!/bin/bash -el
                     go get github.com/kiegroup/kogito-serverless-operator/workflowproj@${KOGITO_SERVERLESS_OPERATOR_VERSION}
+                    go get github.com/kiegroup/kogito-serverless-operator/api@${KOGITO_SERVERLESS_OPERATOR_VERSION}
                     """.trim()
                 }
             }
