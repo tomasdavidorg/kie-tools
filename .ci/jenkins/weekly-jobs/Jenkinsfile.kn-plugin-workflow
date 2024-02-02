@@ -192,6 +192,7 @@ pipeline {
 
     post {
         always {
+            archiveArtifacts artifacts: "packages/kn-plugin-workflow/go.*"
             cleanWs(deleteDirs: true)
         }
     }
