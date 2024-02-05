@@ -44,7 +44,7 @@ pipeline {
         KIE_TOOLS_BUILD__runEndToEndTests = 'false'
         KIE_TOOLS_BUILD__buildContainerImages = 'true'
         KN_PLUGIN_WORKFLOW__kogitoVersion = "${KOGITO_VERSION}"
-        KN_PLUGIN_WORKFLOW__devModeImage = "quay.io/kiegroup/kogito-swf-devmode:${DEV_MODE_IMAGE_VERSION}"
+        KN_PLUGIN_WORKFLOW__devModeImage = "quay.io/kiegroup/kogito-swf-devmode-nightly:${DEV_MODE_IMAGE_VERSION}"
 
         PNPM_FILTER_STRING = '-F @kie-tools/kn-plugin-workflow...'
     }
