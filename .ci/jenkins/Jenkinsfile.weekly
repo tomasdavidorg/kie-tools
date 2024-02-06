@@ -78,9 +78,9 @@ pipeline {
                             booleanParam(name: 'DRY_RUN', value: "${params.DRY_RUN}"),
                             string(name: 'BASE_REF', value: "${params.BASE_REF}"),
                             string(name: 'TAG', value: "${params.TAG}"),
-                            string(name: 'UPLOAD_ASSET_URL', value: "${params.UPLOAD_ASSET_URL}")
-                            string(name: 'KOGITO_VERSION', value: "${params.KOGITO_VERSION}")
-                            string(name: 'DEV_MODE_IMAGE_VERSION', value: "${params.DEV_MODE_IMAGE_VERSION}")
+                            string(name: 'UPLOAD_ASSET_URL', value: "${params.UPLOAD_ASSET_URL}"),
+                            string(name: 'KOGITO_VERSION', value: "${params.KOGITO_VERSION}"),
+                            string(name: 'DEV_MODE_IMAGE_VERSION', value: "${params.DEV_MODE_IMAGE_VERSION}"),
                             string(name: 'KOGITO_SERVERLESS_OPERATOR_VERSION', value: "${params.KOGITO_SERVERLESS_OPERATOR_VERSION}")
                         ]
                     ).result
