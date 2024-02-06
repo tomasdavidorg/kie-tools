@@ -73,7 +73,7 @@ pipeline {
                 script {
                     env.KN_PLUGIN_WORKFLOW_JOB_RESULT = build(
                         wait: true,
-                        job: 'KIE/kie-tools/weekly-jobs/kn-plugin-workflow',
+                        job: 'KIE/test/tdavid/kie-tools/weekly-jobs/kie-tools-weekly-jobs',
                         parameters: [
                             booleanParam(name: 'DRY_RUN', value: "${params.DRY_RUN}"),
                             string(name: 'BASE_REF', value: "${params.BASE_REF}"),
