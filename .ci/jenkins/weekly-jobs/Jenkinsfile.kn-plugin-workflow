@@ -120,7 +120,7 @@ pipeline {
                 }
             }
         }
-/*
+
         stage('Upload Knative CLI Workflow Plugin for Linux') {
             when {
                 expression { !params.DRY_RUN }
@@ -188,12 +188,12 @@ pipeline {
                 }
             }
         }
-        */
     }
 
     post {
         always {
             archiveArtifacts artifacts: "packages/kn-plugin-workflow/go.*"
+            archiveArtifacts artifacts: "packages/kn-plugin-workflow/dist/kn-workflow-linux-amd64"
             cleanWs(deleteDirs: true)
         }
     }

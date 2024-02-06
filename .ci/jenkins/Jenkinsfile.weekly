@@ -1,0 +1,103 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+pipeline {
+    agent {
+        docker {
+            image 'quay.io/kie-tools/kie-tools-ci-build:latest'
+            args '--shm-size=2g --privileged --group-add docker'
+        }
+    }
+
+    options {
+        timeout(time: 600, unit: 'MINUTES')
+    }
+
+    parameters {
+        booleanParam(description: 'Dry run', name: 'DRY_RUN', defaultValue: true)
+        string(description: 'Base Ref', name: 'BASE_REF')
+        string(description: 'Tag', name: 'TAG', defaultValue: '0.0.0')
+        string(description: 'Upload asset url', name: 'UPLOAD_ASSET_URL', defaultValue: '')
+        string(description: 'Runners', name: 'RUNNERS', defaultValue: '{"kn_plugin_workflow":"true"}')
+
+        string(description: 'Kogito Version', name: 'KOGITO_VERSION', defaultValue: '1.44.1.Final')
+        string(description: 'Dev Mode Image Version', name: 'DEV_MODE_IMAGE_VERSION', defaultValue: '1.44')
+        string(description: 'Kogito Serverless Operator Version', name: 'KOGITO_SERVERLESS_OPERATOR_VERSION', defaultValue: 'v1.44.1')
+    }
+
+    stages {
+        stage('Load local shared scripts') {
+            steps {
+                script {
+                    pipelineVars = load '.ci/jenkins/shared-scripts/pipelineVars.groovy'
+                    openShiftUtils = load '.ci/jenkins/shared-scripts/openShiftUtils.groovy'
+                }
+            }
+        }
+
+        stage('Set Runners') {
+            steps {
+                script {
+                    runners = readJSON text: "${params.RUNNERS}"
+                    env.KN_PLUGIN_WORKFLOW = runners.kn_plugin_workflow
+                }
+            }
+        }
+
+        stage('Print Runners') {
+            steps {
+                sh """
+                echo "kn_plugin_workflow: ${env.KN_PLUGIN_WORKFLOW}"
+                """.trim()
+            }
+        }
+
+        stage('Kn Plugin Workflow') {
+            when {
+                expression { env.KN_PLUGIN_WORKFLOW == 'true' }
+            }
+            steps {
+                script {
+                    env.KN_PLUGIN_WORKFLOW_JOB_RESULT = build(
+                        wait: true,
+                        job: 'KIE/kie-tools/weekly-jobs/kn-plugin-workflow',
+                        parameters: [
+                            booleanParam(name: 'DRY_RUN', value: "${params.DRY_RUN}"),
+                            string(name: 'BASE_REF', value: "${params.BASE_REF}"),
+                            string(name: 'TAG', value: "${params.TAG}"),
+                            string(name: 'UPLOAD_ASSET_URL', value: "${params.UPLOAD_ASSET_URL}")
+                        ]
+                    ).result
+                }
+            }
+        }
+
+        stage('Print Job Results') {
+            steps {
+                sh """
+                echo "KN Plugin Workflow : ${env.KN_PLUGIN_WORKFLOW_JOB_RESULT}"
+                """.trim()
+            }
+        }
+    }
+
+         
+    post {
+        always {
+            cleanWs(deleteDirs: true)
+        }
+    }
+}
